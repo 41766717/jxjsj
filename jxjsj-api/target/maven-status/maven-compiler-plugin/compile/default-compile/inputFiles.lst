@@ -1,0 +1,11 @@
+/Users/niyang/soft/jxjsj/jxjsj-api/src/main/java/com/jxjsj/api/vo/DetailListRequest.java
+/Users/niyang/soft/jxjsj/jxjsj-api/src/main/java/com/jxjsj/api/vo/DossierListRequest.java
+/Users/niyang/soft/jxjsj/jxjsj-api/src/main/java/com/jxjsj/api/mongodb/DossierModel.java
+/Users/niyang/soft/jxjsj/jxjsj-api/src/main/java/com/jxjsj/api/mongodb/CaseModel.java
+/Users/niyang/soft/jxjsj/jxjsj-api/src/main/java/com/jxjsj/api/mongodb/DetailModel.java
+/Users/niyang/soft/jxjsj/jxjsj-api/src/main/java/com/jxjsj/api/vo/CaseListRequest.java
+/Users/niyang/soft/jxjsj/jxjsj-api/src/main/java/com/jxjsj/api/vo/CaseListResponse.java
+/Users/niyang/soft/jxjsj/jxjsj-api/src/main/java/com/jxjsj/api/mongodb/CategoryModel.java
+/Users/niyang/soft/jxjsj/jxjsj-api/src/main/java/com/jxjsj/api/vo/DetailListResponse.java
+/Users/niyang/soft/jxjsj/jxjsj-api/src/main/java/com/jxjsj/api/constans/Constans.java
+/Users/niyang/soft/jxjsj/jxjsj-api/src/main/java/com/jxjsj/api/vo/DossierListResponse.java
