@@ -5,6 +5,8 @@ import com.jxjsj.api.vo.CaseListRequest;
 import com.jxjsj.api.vo.CaseListResponse;
 import com.jxjsj.util.BizException;
 
+import java.util.List;
+
 /**
  * Created by niyang on 2017/10/24.
  */
@@ -50,4 +52,11 @@ public interface ICaseService {
      */
     public Boolean deleteCase(String caseId) throws BizException;
 
+    /**
+     * 批量删除案件
+     * @param caseIdList
+     * @return
+     * @throws BizException
+     */
+    public Boolean batchDeleteCase(List<String> caseIdList) throws BizException;
 }

@@ -9,7 +9,10 @@ import com.jxjsj.util.BizException;
 import com.jxjsj.util.RestResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by niyang on 2017/10/24.
@@ -97,6 +100,21 @@ public class CaseController {
         BizException.isNull(caseId, "案件编号");
 
         caseService.deleteCase(caseId);
+        return RestResult.createSuccessfull(true);
+    }
+
+    /**
+     * 批量删除案件
+     *
+     * @param caseIdList
+     * @return
+     */
+    @RequestMapping(value = "/case-batch-delete", method = RequestMethod.POST)
+    public RestResult<Boolean> batchDeleteCase(@RequestParam(value = "caseIdList") List<String> caseIdList){
+        if(CollectionUtils.isEmpty(caseIdList)){
+            BizException.fail(603,"案件编号");
+        }
+        caseService.batchDeleteCase(caseIdList);
         return RestResult.createSuccessfull(true);
     }
 

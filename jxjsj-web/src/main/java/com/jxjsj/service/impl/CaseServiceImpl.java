@@ -136,7 +136,7 @@ public class CaseServiceImpl implements ICaseService {
             query.addCriteria(criteria);
 
             Update update = new Update();
-            if(!StringUtils.isEmpty(caseModel.getCaseName())){
+            if (!StringUtils.isEmpty(caseModel.getCaseName())) {
                 update.set("caseName", caseModel.getCaseName());
             }
             update.set("updateTime", new Date());
@@ -162,6 +162,28 @@ public class CaseServiceImpl implements ICaseService {
         try {
             Criteria criteria = new Criteria("caseId");
             criteria.is(caseId);
+            Query query = new Query();
+            query.addCriteria(criteria);
+
+            Update update = new Update();
+            update.set("isDeleted", true);
+            update.set("updateTime", new Date());
+            WriteResult result = mongoTemplate.updateMulti(query, update, CaseModel.class, Constans.COLLECTIONS_CASE);
+            if (result.getN() <= 0) {
+                BizException.fail(502, "更新数据出错");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            BizException.fail(501, "更新数据出错");
+        }
+        return true;
+    }
+
+    @Override
+    public Boolean batchDeleteCase(List<String> caseIdList) {
+        try {
+            Criteria criteria = new Criteria("caseId");
+            criteria.in(caseIdList);
             Query query = new Query();
             query.addCriteria(criteria);
 
