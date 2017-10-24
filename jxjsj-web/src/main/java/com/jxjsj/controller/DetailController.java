@@ -1,11 +1,8 @@
 package com.jxjsj.controller;
 
 import com.jxjsj.api.mongodb.DetailModel;
-import com.jxjsj.api.mongodb.DossierModel;
 import com.jxjsj.api.vo.DetailListRequest;
 import com.jxjsj.api.vo.DetailListResponse;
-import com.jxjsj.api.vo.DossierListRequest;
-import com.jxjsj.api.vo.DossierListResponse;
 import com.jxjsj.service.IDetailService;
 import com.jxjsj.util.BizException;
 import com.jxjsj.util.RestResult;
