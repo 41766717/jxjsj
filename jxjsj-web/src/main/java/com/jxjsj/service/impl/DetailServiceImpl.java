@@ -50,6 +50,11 @@ public class DetailServiceImpl implements IDetailService {
             criteriaArrayLenth++;
         }
 
+        if (!StringUtils.isEmpty(request.getDossierId())) {
+            searchCriteriaList.add(Criteria.where("dossierId").is(request.getDossierId()));
+            criteriaArrayLenth++;
+        }
+
         Criteria[] searchCriteriaArray = new Criteria[criteriaArrayLenth];
 
         for (int i = 0; i < searchCriteriaList.size(); i++) {
