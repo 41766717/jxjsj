@@ -45,7 +45,8 @@ public class DossierServiceImpl implements IDossierService {
     @Override
     public DossierListResponse getDossierList(DossierListRequest request) {
         String caseId = request.getCaseId();
-        Integer pageSize = request.getPageSize();
+//        Integer pageSize = request.getPageSize();
+        Integer pageSize = 100;
         Integer pageIndex = request.getPageIndex();
 
 
