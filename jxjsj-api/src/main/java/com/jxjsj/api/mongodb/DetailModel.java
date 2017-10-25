@@ -11,8 +11,17 @@ public class DetailModel implements Serializable {
 
     private String dossierId;
     private String detailId;
+    //责任者
+    private String author;
+    //文号
+    private String referenceNum;
+    //标题
     private String detailTitle;
     private String fileName;
+    //页号
+    private String pageNumber;
+    //备注
+    private String remark;
     private Boolean isDeleted = false;
     private Date createTime;
     private Date updateTime;
@@ -71,5 +80,37 @@ public class DetailModel implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getReferenceNum() {
+        return referenceNum;
+    }
+
+    public void setReferenceNum(String referenceNum) {
+        this.referenceNum = referenceNum;
+    }
+
+    public String getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber(String pageNumber) {
+        this.pageNumber = pageNumber;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }
