@@ -9,11 +9,13 @@ import com.jxjsj.util.RestResult;
 import com.jxjsj.util.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.List;
 
 /**
  * Created by niyang on 2017/10/24.
@@ -90,6 +92,21 @@ public class DetailController {
         BizException.isNull(detailId, "事件编号");
 
         detailService.deleteDetail(detailId);
+        return RestResult.createSuccessfull(true);
+    }
+
+    /**
+     * 批量删除事件
+     *
+     * @param detailIdList
+     * @return
+     */
+    @RequestMapping(value = "/detail-batch-delete", method = RequestMethod.POST)
+    public RestResult<Boolean> batchDeleteCase(@RequestParam(value = "detailIdList") List<String> detailIdList){
+        if(CollectionUtils.isEmpty(detailIdList)){
+            BizException.fail(603,"事件编号");
+        }
+        detailService.batchDeleteDetail(detailIdList);
         return RestResult.createSuccessfull(true);
     }
 

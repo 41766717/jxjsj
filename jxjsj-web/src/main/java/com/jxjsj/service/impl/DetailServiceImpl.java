@@ -115,6 +115,40 @@ public class DetailServiceImpl implements IDetailService {
             if (!StringUtils.isEmpty(detailModel.getFileName())) {
                 update.set("fileName", detailModel.getFileName());
             }
+            if (!StringUtils.isEmpty(detailModel.getAuthor())) {
+                update.set("author", detailModel.getAuthor());
+            }
+            if (!StringUtils.isEmpty(detailModel.getReferenceNum())) {
+                update.set("referenceNum", detailModel.getReferenceNum());
+            }
+            if (!StringUtils.isEmpty(detailModel.getPageNumber())) {
+                update.set("pageNumber", detailModel.getPageNumber());
+            }
+            if (!StringUtils.isEmpty(detailModel.getRemark())) {
+                update.set("remark", detailModel.getRemark());
+            }
+            update.set("updateTime", new Date());
+            WriteResult result = mongoTemplate.updateMulti(query, update, DetailModel.class, Constans.COLLECTIONS_DETAIL);
+            if (result.getN() <= 0) {
+                BizException.fail(502, "更新数据出错");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            BizException.fail(501, "更新数据出错");
+        }
+        return true;
+    }
+
+    @Override
+    public Boolean batchDeleteDetail(List<String> detailIdList) {
+        try {
+            Criteria criteria = new Criteria("detailId");
+            criteria.in(detailIdList);
+            Query query = new Query();
+            query.addCriteria(criteria);
+
+            Update update = new Update();
+            update.set("isDeleted", true);
             update.set("updateTime", new Date());
             WriteResult result = mongoTemplate.updateMulti(query, update, DetailModel.class, Constans.COLLECTIONS_DETAIL);
             if (result.getN() <= 0) {
