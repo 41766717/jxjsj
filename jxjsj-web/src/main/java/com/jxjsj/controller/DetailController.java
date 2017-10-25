@@ -26,7 +26,7 @@ public class DetailController {
     @Value("${filePath}")
     private String filePath;
 
-    private static String STANDARD_SUFFIX_NAME = "pdf";
+    private static String STANDARD_SUFFIX_NAME = ".pdf";
 
     @Autowired
     private IDetailService detailService;
@@ -108,6 +108,7 @@ public class DetailController {
         String fileName = file.getOriginalFilename();
         // 获取文件的后缀名
         String suffixName = fileName.substring(fileName.lastIndexOf("."));
+        suffixName = suffixName.toLowerCase();
         if (!STANDARD_SUFFIX_NAME.equals(suffixName)) {
             BizException.fail(300, "只能上传pdf文件");
         }
