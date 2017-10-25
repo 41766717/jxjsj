@@ -9,15 +9,15 @@ import java.util.List;
  * Created by niyang on 2017/10/24.
  */
 public class DossierListResponse implements Serializable {
-    private List<DossierModel> dossierModelList;
+    private List<DossierInfoVo> dossierInfoVoList;
     private Long count;
 
-    public List<DossierModel> getDossierModelList() {
-        return dossierModelList;
+    public List<DossierInfoVo> getDossierInfoVoList() {
+        return dossierInfoVoList;
     }
 
-    public void setDossierModelList(List<DossierModel> dossierModelList) {
-        this.dossierModelList = dossierModelList;
+    public void setDossierInfoVoList(List<DossierInfoVo> dossierInfoVoList) {
+        this.dossierInfoVoList = dossierInfoVoList;
     }
 
     public Long getCount() {

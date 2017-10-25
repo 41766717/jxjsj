@@ -1,13 +1,17 @@
 package com.jxjsj.service.impl;
 
 import com.jxjsj.api.constans.Constans;
+import com.jxjsj.api.mongodb.CategoryModel;
 import com.jxjsj.api.mongodb.DossierModel;
+import com.jxjsj.api.vo.DossierInfoVo;
 import com.jxjsj.api.vo.DossierListRequest;
 import com.jxjsj.api.vo.DossierListResponse;
+import com.jxjsj.service.ICategoryService;
 import com.jxjsj.service.IDossierService;
 import com.jxjsj.util.BizException;
 import com.jxjsj.util.UUIDUtil;
 import com.mongodb.WriteResult;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -16,10 +20,9 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Created by niyang on 2017/10/24.
@@ -29,6 +32,9 @@ public class DossierServiceImpl implements IDossierService {
 
     @Autowired
     private MongoTemplate mongoTemplate;
+
+    @Autowired
+    private ICategoryService categoryService;
 
     /**
      * 卷书列表
@@ -74,8 +80,20 @@ public class DossierServiceImpl implements IDossierService {
 
         List<DossierModel> dossierModelList = mongoTemplate.find(query, DossierModel.class, Constans.COLLECTIONS_DOSSIER);
 
+        List<CategoryModel> categoryModelList=categoryService.getCategoryList();
+        Map<String,CategoryModel> categoryModelMap=categoryModelList.stream().collect(Collectors.toMap(CategoryModel::getCategoryId, Function.identity()));
+
+        List<DossierInfoVo> dossierInfoVoList=new ArrayList<>();
+        for (DossierModel dossierModel:dossierModelList) {
+            DossierInfoVo dossierInfoVo=new DossierInfoVo();
+            BeanUtils.copyProperties(dossierModel,dossierInfoVo);
+            String categoryId=dossierModel.getCategoryId();
+            String categoryName=categoryModelMap.get(categoryId).getCategoryName();
+            dossierInfoVo.setCategoryName(categoryName);
+            dossierInfoVoList.add(dossierInfoVo);
+        }
         DossierListResponse dossierListResponse = new DossierListResponse();
-        dossierListResponse.setDossierModelList(dossierModelList);
+        dossierListResponse.setDossierInfoVoList(dossierInfoVoList);
         dossierListResponse.setCount(count);
         return dossierListResponse;
 
